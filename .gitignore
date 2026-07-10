@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.env
+extracted_audio.wav
+vad_chunks/
+uploads/
+*.mp4

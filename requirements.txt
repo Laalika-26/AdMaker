@@ -1,0 +1,7 @@
+moviepy
+faster-whisper
+rich
+huggingface-hub
+numpy
+soundfile
+google-generativeai
