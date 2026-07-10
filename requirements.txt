@@ -1,8 +1,10 @@
 moviepy
-faster-whisper
 rich
-huggingface-hub
 numpy
 soundfile
 google-generativeai
 python-dotenv
+requests
+# faster-whisper and torch are optional — only needed for local Whisper mode
+# Uncomment the line below if running locally with Whisper:
+# faster-whisper

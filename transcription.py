@@ -1,7 +1,7 @@
 import os
 import time
 import random
-import torch
+# torch is imported lazily below — only when Whisper is actually used
 
 class AudioTranscriber:
     def __init__(self, model_size="tiny", device="cpu", compute_type="default", use_mock=False, provider="whisper", api_key=None):
@@ -31,9 +31,13 @@ class AudioTranscriber:
                 print("[Transcriber] Initializing Google Gemini audio transcriber (REST mode)...")
                 return
 
-        # Auto-detect device
+        # Auto-detect device (lazy-import torch only if we reach this Whisper path)
         if device == "auto":
-            device = "cuda" if torch.cuda.is_available() else "cpu"
+            try:
+                import torch
+                device = "cuda" if torch.cuda.is_available() else "cpu"
+            except ImportError:
+                device = "cpu"
             
         # Determine compute type based on device
         if compute_type == "default":
