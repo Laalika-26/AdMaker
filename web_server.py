@@ -7,6 +7,7 @@ import tempfile
 import sys
 import re
 
+# Render assigns a dynamic port via the PORT environment variable
 PORT = int(os.environ.get("PORT", 8000))
 
 # Try to load environment variables from .env file
@@ -22,6 +23,7 @@ class PipelineHTTPHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type, X-Filename')
+        self.send_header('Access-Control-Max-Age', '86400')
         super().end_headers()
 
     def do_OPTIONS(self):

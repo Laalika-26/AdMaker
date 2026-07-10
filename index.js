@@ -1,6 +1,7 @@
 // Configure API Base URL. Leave empty if serving frontend and backend from the same server.
-// For Vercel + Render setup, set this to your Render service URL (e.g., "https://admaker-backend.onrender.com").
-const API_BASE = "";
+// For Vercel + Render setup, set this to your Render service URL.
+const API_BASE = "https://admaker-d1j6.onrender.com";
+
 
 // --------------------------------------------------------
 // Drag and Drop Uploader Elements & Events

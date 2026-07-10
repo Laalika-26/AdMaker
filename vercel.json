@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "name": "admaker-engine",
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "index.css", "use": "@vercel/static" },
+    { "src": "index.js", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}
