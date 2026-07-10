@@ -7,7 +7,7 @@ import tempfile
 import sys
 import re
 
-PORT = 8000
+PORT = int(os.environ.get("PORT", 8000))
 
 # Try to load environment variables from .env file
 try:

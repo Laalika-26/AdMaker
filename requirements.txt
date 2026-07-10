@@ -5,3 +5,4 @@ huggingface-hub
 numpy
 soundfile
 google-generativeai
+python-dotenv
