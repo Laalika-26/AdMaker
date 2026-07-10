@@ -1,3 +1,7 @@
+// Configure API Base URL. Leave empty if serving frontend and backend from the same server.
+// For Vercel + Render setup, set this to your Render service URL (e.g., "https://admaker-backend.onrender.com").
+const API_BASE = "";
+
 // --------------------------------------------------------
 // Drag and Drop Uploader Elements & Events
 // --------------------------------------------------------
@@ -96,7 +100,7 @@ function handleFileUpload(file) {
     submitBtn.textContent = "Uploading File...";
 
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/api/upload");
+    xhr.open("POST", `${API_BASE}/api/upload`);
     
     // Set custom headers to communicate metadata
     xhr.setRequestHeader("X-Filename", file.name);
@@ -313,7 +317,7 @@ document.getElementById("pipeline-form").addEventListener("submit", async (e) =>
     };
 
     try {
-        const response = await fetch("/api/process", {
+        const response = await fetch(`${API_BASE}/api/process`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
