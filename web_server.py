@@ -60,13 +60,14 @@ class PipelineHTTPHandler(http.server.SimpleHTTPRequestHandler):
                         f.write(chunk)
                         bytes_read += len(chunk)
                         
-                print(f"[Server] Upload completed successfully: '{upload_path}'")
+                abs_path = os.path.abspath(upload_path)
+                print(f"[Server] Upload completed successfully: '{abs_path}'")
                 
                 # Respond with the local server path of the uploaded file
                 self.send_response(200)
                 self.send_header('Content-Type', 'application/json')
                 self.end_headers()
-                self.wfile.write(json.dumps({"video_path": upload_path}).encode('utf-8'))
+                self.wfile.write(json.dumps({"video_path": abs_path}).encode('utf-8'))
                 
             except Exception as e:
                 print(f"[Server] Error during file upload: {e}")
