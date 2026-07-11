@@ -3,229 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdMarker Engine - Professional Video Analytics Dashboard</title>
-    <!-- Premium Google Fonts -->
+    <title>AdMarker Engine - Intelligent AI-Powered Video Ad Placement</title>
+    <!-- Professional Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="landing.css">
 </head>
 <body>
-    <div class="glow-bg"></div>
-    <div class="app-container">
-        
-        <!-- Premium Dashboard Header -->
-        <header class="app-header">
-            <div class="header-logo-section">
-                <span class="pulse-dot"></span>
-                <div class="brand-text">
-                    <h1>AdMarker <span class="accent-version">Engine v2.0</span></h1>
-                    <p class="subtitle">AI-Powered Conversational Quiet-Zone Detection & Contextual Tagging</p>
-                </div>
-            </div>
-            <div class="system-badge">
-                <span class="badge-status-dot"></span>
-                <span class="badge-text">Core Node Running</span>
-            </div>
-        </header>
-
-        <!-- Main Workspace Grid -->
-        <main class="workspace-grid">
-            
-            <!-- Left Side: Upload & Settings Column -->
-            <div class="control-column">
-                
-                <!-- Section 1: Drag-and-Drop Uploader -->
-                <section class="panel upload-panel">
-                    <div class="panel-header">
-                        <div class="panel-icon">▲</div>
-                        <h3>Video Upload</h3>
-                    </div>
-                    
-                    <div id="drop-zone" class="drop-zone">
-                        <input type="file" id="file-input" accept="video/*,audio/*" style="display: none;">
-                        <div class="drop-zone-content">
-                            <div class="upload-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5h10.5a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0017.25 4.5H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25z" />
-                                </svg>
-                            </div>
-                            <p class="drop-primary">Drag & drop video here</p>
-                            <p class="drop-secondary">or click to browse local files</p>
-                            <p class="drop-formats">Supports MP4, MOV, WAV, MP3</p>
-                        </div>
-                        
-                        <!-- Upload Progress State -->
-                        <div id="upload-progress-state" class="upload-progress-state hidden">
-                            <div class="progress-spinner"></div>
-                            <p id="upload-filename" class="upload-filename">video_file.mp4</p>
-                            <p id="upload-filesize" class="upload-filesize">0.0 MB</p>
-                            <div class="progress-bar-container">
-                                <div id="upload-progress-fill" class="progress-bar-fill" style="width: 0%;"></div>
-                            </div>
-                            <p id="upload-percent" class="upload-percent">0% Uploaded</p>
-                        </div>
-                        
-                        <!-- Upload Success State -->
-                        <div id="upload-success-state" class="upload-success-state hidden">
-                            <div class="success-checkmark">✓</div>
-                            <p id="success-filename" class="success-filename">video_file.mp4</p>
-                            <p class="success-msg">File uploaded & ready for analysis</p>
-                            <button type="button" id="change-file-btn" class="text-button">Change File</button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Section 2: Pipeline Configuration -->
-                <section class="panel settings-panel">
-                    <div class="panel-header">
-                        <div class="panel-icon">⚙</div>
-                        <h3>Configuration</h3>
-                    </div>
-                    
-                    <form id="pipeline-form">
-                        <input type="hidden" id="video-path-hidden" value="">
-                        
-                        <div class="form-group">
-                            <label for="trans-provider">Transcription Model</label>
-                            <select id="trans-provider">
-                                <option value="whisper">Whisper (faster-whisper)</option>
-                                <option value="gemini" selected>Google Gemini (REST)</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="llm-provider">Context Tagging</label>
-                            <select id="llm-provider">
-                                <option value="fallback">Heuristics (Fallback)</option>
-                                <option value="hf_api">Hugging Face API</option>
-                                <option value="gemini" selected>Google Gemini (REST)</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="slider-header">
-                                <label for="min-gap">Minimum Silent Gap</label>
-                                <span id="min-gap-val" class="mono-value">1.5s</span>
-                            </div>
-                            <input type="range" id="min-gap" min="0.5" max="5.0" step="0.1" value="1.5">
-                        </div>
-
-                        <div class="checkbox-group">
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="mock-whisper" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                            <label for="mock-whisper" class="checkbox-label">
-                                Enable Mock Whisper <span class="label-hint">(Instant Offline Testing)</span>
-                            </label>
-                        </div>
-
-                        <button type="submit" id="submit-btn" class="glow-button" disabled>
-                            Upload a Video to Begin
-                        </button>
-                    </form>
-                </section>
-            </div>
-            
-            <!-- Right Side: Live Monitor & Logs Column -->
-            <div class="monitor-column">
-                
-                <!-- Pipeline Monitor Dashboard -->
-                <section class="panel monitor-panel">
-                    <div class="panel-header">
-                        <div class="panel-icon">🖵</div>
-                        <h3>Pipeline Status</h3>
-                        <div class="terminal-dots">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                        </div>
-                    </div>
-                    
-                    <!-- Stages Progress Board -->
-                    <div class="stages-board">
-                        <div class="stage-card" id="stage-extract">
-                            <div class="stage-icon">⏳</div>
-                            <div class="stage-info">
-                                <span class="stage-name">Audio Extraction</span>
-                            </div>
-                        </div>
-                        
-                        <div class="stage-card" id="stage-vad">
-                            <div class="stage-icon">⏳</div>
-                            <div class="stage-info">
-                                <span class="stage-name">VAD Chunking</span>
-                            </div>
-                        </div>
-                        
-                        <div class="stage-card" id="stage-transcribe">
-                            <div class="stage-icon">⏳</div>
-                            <div class="stage-info">
-                                <span class="stage-name">Transcription</span>
-                            </div>
-                        </div>
-                        
-                        <div class="stage-card" id="stage-analyze">
-                            <div class="stage-icon">⏳</div>
-                            <div class="stage-info">
-                                <span class="stage-name">Boundary Scoring</span>
-                            </div>
-                        </div>
-                        
-                        <div class="stage-card" id="stage-tag">
-                            <div class="stage-icon">⏳</div>
-                            <div class="stage-info">
-                                <span class="stage-name">Context Tagging</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Live Console Output -->
-                    <div class="console-box">
-                        <div class="console-header">
-                            <span class="console-title">Live Log Console</span>
-                            <span class="console-subtitle">guest@admarker:~</span>
-                        </div>
-                        <div class="console-body" id="terminal-output">
-                            <div class="console-line system">Dashboard UI initialized. Waiting for input video stream...</div>
-                            <div class="console-line prompt">guest@admarker:~$ _</div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            
-            <!-- Bottom: Recommendation Results -->
-            <section class="panel results-panel hidden" id="results-panel">
-                <div class="results-header">
-                    <div class="results-title-group">
-                        <div class="results-tag">RESULTS READY</div>
-                        <h2>Identified Ad Markers & Product Targeting</h2>
-                    </div>
-                    <span class="badge" id="breaks-count">0 Breaks Found</span>
-                </div>
-                
-                <div class="table-outer-wrapper">
-                    <table class="dashboard-table">
-                        <thead>
-                            <tr>
-                                <th>Marker ID</th>
-                                <th>Timestamp</th>
-                                <th>Gap Size</th>
-                                <th>Preceding Conversational Context</th>
-                                <th>Topic & Tone Classification</th>
-                                <th>Targeted Ad Suggestions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="results-table-body">
-                            <!-- Populated Dynamically -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </main>
-    </div>
     
-    <script src="index.js"></script>
+    <!-- Cyber Grid Glow Overlay -->
+    <div class="glow-grid-overlay"></div>
+
+    <!-- Navigation Header -->
+    <nav class="navbar container">
+        <div class="nav-brand">
+            <span class="brand-dot"></span>
+            <span class="brand-name">AdMarker Engine</span>
+            <span class="brand-badge">v2.0</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#demo">Interactive Demo</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="app.html" class="btn btn-primary btn-sm">Launch Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero container">
+        <div class="hero-tag">AI-Powered Ad Boundary Detection</div>
+        <h1>
+            <span class="text-gradient">Automated Video Ad-Marker</span><br>
+            & Contextual Recommendation Engine
+        </h1>
+        <p class="hero-subtitle">
+            Placing advertisements at random timestamps highly disrupts the viewer experience. AdMarker Engine automatically identifies natural conversational boundaries and semantic pauses, injecting highly relevant, non-disruptive ads using Voice Activity Detection and Large Language Models.
+        </p>
+        <div class="hero-ctas">
+            <a href="app.html" class="btn btn-primary">
+                Launch Dashboard
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width: 16px; height: 16px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                </svg>
+            </a>
+            <a href="#demo" class="btn btn-secondary">Try Interactive Demo</a>
+        </div>
+
+        <!-- Dashboard Image Preview -->
+        <div class="panel" style="max-width: 900px; margin: 0 auto; padding: 0.5rem; overflow: hidden; border-radius: 14px;">
+            <div style="background: #11091a; padding: 6px 12px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--border-pink);">
+                <span style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%;"></span>
+                <span style="width: 8px; height: 8px; background: #f59e0b; border-radius: 50%;"></span>
+                <span style="width: 8px; height: 8px; background: #10b981; border-radius: 50%;"></span>
+                <span style="margin-left: 10px; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted);">admarker_dashboard_v2.png</span>
+            </div>
+            <div style="position: relative; line-height: 0;">
+                <img src="report_images/dashboard_state1.png" alt="AdMarker Dashboard UI" style="width: 100%; border-radius: 0 0 8px 8px; opacity: 0.95; filter: contrast(1.05);">
+            </div>
+        </div>
+    </header>
+
+    <!-- Key Stats -->
+    <section class="stats-section container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>98%</h3>
+                <p>User Retention rate</p>
+            </div>
+            <div class="stat-item">
+                <h3>0.5s</h3>
+                <p>Detection accuracy</p>
+            </div>
+            <div class="stat-item">
+                <h3>10x</h3>
+                <p>Faster than manual marking</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Simulator Section -->
+    <section id="demo" class="simulator-section container">
+        <div class="simulator-header">
+            <h2>Experience the AI Pipeline</h2>
+            <p>Simulate the server processing video in real-time, executing Voice Activity Detection and Gemini LLM tagging.</p>
+        </div>
+
+        <div class="panel simulator-box">
+            <!-- Simulated Browser Header -->
+            <div class="sim-nav">
+                <div class="sim-nav-dots">
+                    <span class="red"></span>
+                    <span class="yellow"></span>
+                    <span class="green"></span>
+                </div>
+                <div class="sim-nav-title">local_instance://admarker-node</div>
+                <div style="width: 40px;"></div>
+            </div>
+
+            <!-- Simulated App Body -->
+            <div class="sim-body">
+                <!-- Left: Simulator Settings -->
+                <div class="sim-controls">
+                    <div>
+                        <div class="sim-control-group">
+                            <label>Source Video</label>
+                            <select class="sim-select" disabled>
+                                <option>sample_clip.mp4 (32.5s)</option>
+                            </select>
+                        </div>
+                        <div class="sim-control-group">
+                            <label>Transcription Engine</label>
+                            <select class="sim-select" disabled>
+                                <option>Google Gemini (REST)</option>
+                            </select>
+                        </div>
+                        <div class="sim-control-group">
+                            <label>Tagging Model</label>
+                            <select class="sim-select" disabled>
+                                <option>Gemini 2.5 Flash Lite</option>
+                            </select>
+                        </div>
+                        <div class="sim-control-group">
+                            <label>Min. Gap Duration</label>
+                            <input type="text" class="sim-input" value="1.5 seconds" disabled>
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="sim-run-btn" class="sim-action-btn">
+                        Run Simulated Pipeline
+                    </button>
+                </div>
+
+                <!-- Right: Status Monitor & Terminal Logs -->
+                <div class="sim-monitor">
+                    <!-- Progress Stage cards -->
+                    <div class="sim-stages">
+                        <div class="sim-stage-card" id="sim-stage-extract">
+                            <span class="sim-stage-icon">▲</span>
+                            Extraction
+                        </div>
+                        <div class="sim-stage-card" id="sim-stage-vad">
+                            <span class="sim-stage-icon">∿</span>
+                            VAD RMS
+                        </div>
+                        <div class="sim-stage-card" id="sim-stage-transcribe">
+                            <span class="sim-stage-icon">✍</span>
+                            Transcribe
+                        </div>
+                        <div class="sim-stage-card" id="sim-stage-analyze">
+                            <span class="sim-stage-icon">⚖</span>
+                            Scoring
+                        </div>
+                        <div class="sim-stage-card" id="sim-stage-tag">
+                            <span class="sim-stage-icon">🏷</span>
+                            LLM Tag
+                        </div>
+                    </div>
+
+                    <!-- Audio Wave Animation Placeholder -->
+                    <div id="sim-wave-vis" class="sim-wave-visualizer">
+                        <span class="sim-wave-bar"></span>
+                        <span class="sim-wave-bar"></span>
+                        <span class="sim-wave-bar"></span>
+                        <span class="sim-wave-bar"></span>
+                        <span class="sim-wave-bar"></span>
+                        <span class="sim-wave-bar"></span>
+                        <span class="sim-wave-bar"></span>
+                        <span class="sim-wave-bar"></span>
+                        <span class="sim-wave-bar"></span>
+                        <span class="sim-wave-bar"></span>
+                    </div>
+
+                    <!-- Console Box -->
+                    <div id="sim-console-output" class="sim-console">
+                        <div class="sim-log-line system">Dashboard node ready. Click 'Run Simulated Pipeline' to begin.</div>
+                    </div>
+
+                    <!-- Simulated suggestion results table -->
+                    <div id="sim-results-panel" class="sim-results">
+                        <div class="sim-results-title">Identified Ad Markers & Product Placement Suggestions</div>
+                        <table class="sim-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Timestamp</th>
+                                    <th>Gap</th>
+                                    <th>Conversational Context</th>
+                                    <th>AI Category</th>
+                                    <th>Recommended Ads</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sim-table-body">
+                                <!-- Filled Dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section container">
+        <div class="section-header">
+            <h2>Engineered For Viewer Experience</h2>
+            <p>Randomly injecting ads ruins user retention. Our multi-stage pipeline makes monetization feel native and non-disruptive.</p>
+        </div>
+
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="panel feature-card">
+                <div class="feature-icon-wrapper">∿</div>
+                <div class="feature-info">
+                    <h3>Memory-Safe Voice Activity Detection</h3>
+                    <p>Reads WAV audio block-by-block (100ms chunks) calculating Root Mean Square (RMS) energy. Maintains a flat memory profile whether processing a 1-minute clip or a 3-hour video.</p>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="panel feature-card">
+                <div class="feature-icon-wrapper">⚖</div>
+                <div class="feature-info">
+                    <h3>Smart Punctuation Scoring</h3>
+                    <p>Evaluates silent intervals. Rewards pauses that occur at sentence endings (., !, ?) with +3.0 score, or clause endings (,, ;, :) with +1.0, avoiding mid-sentence cuts.</p>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="panel feature-card">
+                <div class="feature-icon-wrapper">✍</div>
+                <div class="feature-info">
+                    <h3>Google Gemini REST Transcription</h3>
+                    <p>Bypasses heavy local models by sending structured audio fragments to Google Gemini using a custom JSON output schema for zero-delay speech alignment.</p>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="panel feature-card">
+                <div class="feature-icon-wrapper">🏷</div>
+                <div class="feature-info">
+                    <h3>Contextual Product Recommendations</h3>
+                    <p>Extracts 30 seconds of conversational context preceding the break. The LLM identifies the primary topic, deduces the conversation's tone, and suggests 2-3 targeted product ads.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="architecture-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Technical Data Flow</h2>
+                <p>The step-by-step pipeline coordinates raw file input to live structured web dashboard outputs.</p>
+            </div>
+
+            <div class="flowchart-wrapper">
+                <div class="flow-container">
+                    <div class="flow-step">
+                        <h4>1. Audio Extraction</h4>
+                        <p>FFmpeg extracts high-quality WAV from MP4 source files.</p>
+                    </div>
+                    <div class="flow-arrow">➔</div>
+                    <div class="flow-step">
+                        <h4>2. Block VAD</h4>
+                        <p>100ms RMS energy evaluation locates silent pauses.</p>
+                    </div>
+                    <div class="flow-arrow">➔</div>
+                    <div class="flow-step">
+                        <h4>3. Stitched Speech Text</h4>
+                        <p>Segment transcription is fetched and aligned to global timeline.</p>
+                    </div>
+                    <div class="flow-arrow">➔</div>
+                    <div class="flow-step">
+                        <h4>4. Boundary Scoring</h4>
+                        <p>Scoring algorithm weights gap durations and linguistic markers.</p>
+                    </div>
+                    <div class="flow-arrow">➔</div>
+                    <div class="flow-step">
+                        <h4>5. Gemini Inference</h4>
+                        <p>LLM returns topic, tone, and contextual ad recommendations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Banner -->
+    <section class="cta-banner container">
+        <div class="panel cta-panel">
+            <h2>Ready to Analyze Your Videos?</h2>
+            <p>Upload files locally, monitor stages live, and review structured ad recommendations instantly.</p>
+            <a href="app.html" class="btn btn-primary">Launch Dashboard Application</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div>
+                <div class="footer-text">© 2026 AdMarker Engine. All rights reserved.</div>
+                <div class="footer-text" style="margin-top: 4px;">Designed for professional video analytics and automated ad placements.</div>
+            </div>
+            
+            <div class="pu-badge">
+                <span>Presidency University</span>
+                <span style="color: var(--border-hover);">|</span>
+                <strong>NVIDIA Accelerated AI CoE</strong>
+            </div>
+
+            <div class="footer-credit">
+                Final Internship Project by <a href="#">Laalika J (20241CAI0231)</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="landing.js"></script>
 </body>
 </html>
